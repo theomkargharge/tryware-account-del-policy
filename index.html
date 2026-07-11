@@ -138,26 +138,26 @@
       font-size: .95rem; font-weight: 700; color: var(--text-1); margin-bottom: 16px;
       display: flex; align-items: center; gap: 9px;
     }
-    .method-card h3 svg { width: 17px; height: 17px; color: var(--danger); }
+    .method-card h3 svg.icon { width: 17px; height: 17px; color: var(--danger); }
     .method-tag {
       margin-left: auto; font-size: .64rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
       padding: 3px 9px; border-radius: 6px; background: rgba(34,197,94,.15); color: var(--success);
     }
     .method-tag.slow { background: rgba(156,163,184,.12); color: var(--text-3); }
 
-    .steps { list-style: none; padding: 0; counter-reset: step; }
-    .steps li {
-      counter-increment: step; display: flex; gap: 12px; align-items: flex-start;
-      font-size: .875rem; color: var(--text-2); margin-bottom: 12px;
+    .steps {
+      width: 100%; border-collapse: separate; border-spacing: 0 14px;
+      font-size: .875rem; color: var(--text-2);
     }
-    .steps li::before {
-      content: counter(step); display: flex; align-items: center; justify-content: center;
-      width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+    .steps td { vertical-align: top; padding: 0; line-height: 1.6; }
+    .steps td.num { width: 22px; padding-right: 12px; }
+    .steps td.num span {
+      display: flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%;
       background: linear-gradient(135deg, var(--danger), var(--danger-dark));
       font-size: .7rem; font-weight: 800; color: #fff;
     }
-    .steps li strong { color: var(--text-1); font-weight: 600; }
-    .steps li:last-child { margin-bottom: 0; }
+    .steps strong { color: var(--text-1); font-weight: 600; }
 
     .mailto-link {
       display: inline-flex; align-items: center; gap: 8px;
@@ -197,7 +197,7 @@
       border-radius: var(--radius-md); padding: 20px 24px; margin-bottom: 40px;
       display: flex; gap: 14px; align-items: flex-start;
     }
-    .warning-box svg.lead { width: 22px; height: 22px; color: var(--danger); flex-shrink: 0; margin-top: 1px; }
+    .warning-box svg.icon.lead { width: 22px; height: 22px; color: var(--danger); flex-shrink: 0; margin-top: 1px; }
     .warning-box h4 { font-size: .95rem; font-weight: 700; color: #fca5a5; margin-bottom: 8px; }
     .warning-box ul { color: var(--text-2); font-size: .87rem; padding-left: 18px; }
     .warning-box li { margin-bottom: 4px; }
@@ -209,7 +209,7 @@
       border-radius: var(--radius-md); padding: 18px 22px; margin-bottom: 40px;
       display: flex; gap: 14px; align-items: flex-start;
     }
-    .info-box svg.lead { width: 19px; height: 19px; color: var(--brand-cyan); flex-shrink: 0; margin-top: 2px; }
+    .info-box svg.icon.lead { width: 19px; height: 19px; color: var(--brand-cyan); flex-shrink: 0; margin-top: 2px; }
     .info-box p { font-size: .87rem; color: #b9ecff; margin: 0; line-height: 1.65; }
     .info-box p strong { color: #e4f8ff; }
 
@@ -271,32 +271,32 @@
     <!-- Method 1 — in-app -->
     <div class="method-card primary">
       <h3>
-        <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+        <svg class="icon" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
         In-App
         <span class="method-tag">Instant</span>
       </h3>
-      <ol class="steps">
-        <li>Open the <strong>TryWare AI</strong> app on your device.</li>
-        <li>Tap the <strong>Settings</strong> tab in the bottom navigation bar.</li>
-        <li>Scroll down to the <strong>Account</strong> section.</li>
-        <li>Tap <strong>Delete Account</strong> (shown in red).</li>
-        <li>Read the warning and tap <strong>Delete Permanently</strong> to confirm.</li>
-      </ol>
+      <table class="steps">
+        <tr><td class="num"><span>1</span></td><td>Open the <strong>TryWare AI</strong> app on your device.</td></tr>
+        <tr><td class="num"><span>2</span></td><td>Tap the <strong>Settings</strong> tab in the bottom navigation bar.</td></tr>
+        <tr><td class="num"><span>3</span></td><td>Scroll down to the <strong>Account</strong> section.</td></tr>
+        <tr><td class="num"><span>4</span></td><td>Tap <strong>Delete Account</strong> (shown in red).</td></tr>
+        <tr><td class="num"><span>5</span></td><td>Read the warning and tap <strong>Delete Permanently</strong> to confirm.</td></tr>
+      </table>
     </div>
 
     <!-- Method 2 — email -->
     <div class="method-card">
       <h3>
-        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+        <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
         Email Request
         <span class="method-tag slow">≤ 7 days</span>
       </h3>
-      <ol class="steps">
-        <li>Send an email to our support address below.</li>
-        <li>Use the subject line: <strong>"Account Deletion Request"</strong></li>
-        <li>Include the <strong>email address</strong> linked to your TryWare AI account.</li>
-        <li>We will confirm deletion within <strong>7 business days</strong>.</li>
-      </ol>
+      <table class="steps">
+        <tr><td class="num"><span>1</span></td><td>Send an email to our support address below.</td></tr>
+        <tr><td class="num"><span>2</span></td><td>Use the subject line: <strong>"Account Deletion Request"</strong></td></tr>
+        <tr><td class="num"><span>3</span></td><td>Include the <strong>email address</strong> linked to your TryWare AI account.</td></tr>
+        <tr><td class="num"><span>4</span></td><td>We will confirm deletion within <strong>7 business days</strong>.</td></tr>
+      </table>
       <a href="mailto:crazzyapp28@gmail.com?subject=Account%20Deletion%20Request" class="mailto-link">
         <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
         crazzyapp28@gmail.com
