@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete Account — TryWare AI</title>
+  <meta name="description" content="Request permanent deletion of your TryWare AI account and all associated data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0d14; --card: #181c28; --card2: #1e2235;
+      --border: rgba(255,255,255,.07); --accent: #6c63ff; --accent2: #00d4ff;
+      --text-1: #f0f2ff; --text-2: #9ca3b8; --text-3: #5c6380;
+      --danger: #ef4444; --danger-dark: #b91c1c; --success: #22c55e;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-1); line-height: 1.7; min-height: 100vh; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #1a0a0a 0%, #0b0d14 60%);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 24px 52px; text-align: center;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% -5%, rgba(239,68,68,.28), transparent);
+    }
+    .app-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.25);
+      border-radius: 999px; padding: 6px 18px; margin-bottom: 22px;
+      font-size: .75rem; font-weight: 700; color: #fca5a5;
+      letter-spacing: .07em; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 800;
+      letter-spacing: -.04em; line-height: 1.1; margin-bottom: 14px;
+      background: linear-gradient(135deg, #fff 20%, #fca5a5 80%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero p { color: var(--text-2); font-size: 1rem; max-width: 520px; margin: 0 auto; }
+
+    /* ── LAYOUT ── */
+    .wrapper { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    /* ── APP TAG ── */
+    .app-info {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px 24px; margin-bottom: 36px;
+    }
+    .app-icon {
+      width: 56px; height: 56px; border-radius: 14px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+    }
+    .app-info .info h3 { font-size: 1rem; font-weight: 700; color: var(--text-1); }
+    .app-info .info p  { font-size: .85rem; color: var(--text-2); margin: 2px 0 0; }
+
+    /* ── STEP CARDS ── */
+    .steps-label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text-3); margin-bottom: 14px;
+    }
+    .methods { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+    @media(max-width:560px) { .methods { grid-template-columns: 1fr; } }
+
+    .method-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px; position: relative; overflow: hidden;
+    }
+    .method-card.primary { border-color: rgba(239,68,68,.25); background: rgba(239,68,68,.04); }
+    .method-card h3 { font-size: .95rem; font-weight: 700; color: var(--text-1); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .method-tag {
+      font-size: .65rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 6px; background: rgba(34,197,94,.15); color: var(--success);
+    }
+    .method-tag.slow { background: rgba(156,163,184,.1); color: var(--text-3); }
+
+    .steps { list-style: none; padding: 0; counter-reset: step; }
+    .steps li {
+      counter-increment: step; display: flex; gap: 12px; align-items: flex-start;
+      font-size: .875rem; color: var(--text-2); margin-bottom: 12px;
+    }
+    .steps li::before {
+      content: counter(step); display: flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--danger), #f97316);
+      font-size: .7rem; font-weight: 800; color: #fff;
+    }
+    .steps li strong { color: var(--text-1); }
+    .steps li:last-child { margin-bottom: 0; }
+
+    .mailto-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--accent2); font-weight: 600; font-size: .9rem;
+      text-decoration: none; margin-top: 14px;
+      border: 1px solid rgba(0,212,255,.2); border-radius: 8px;
+      padding: 8px 16px; background: rgba(0,212,255,.05);
+      transition: background .2s;
+    }
+    .mailto-link:hover { background: rgba(0,212,255,.12); }
+
+    /* ── WHAT GETS DELETED ── */
+    .section-title {
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text-3);
+      margin: 0 0 14px;
+    }
+    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 40px; }
+    @media(max-width:500px) { .data-grid { grid-template-columns: 1fr; } }
+
+    .data-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 16px;
+    }
+    .data-item .dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px;
+    }
+    .data-item .dot.deleted { background: var(--danger); }
+    .data-item .dot.kept    { background: #f59e0b; }
+    .data-item .text h4     { font-size: .85rem; font-weight: 600; color: var(--text-1); margin-bottom: 2px; }
+    .data-item .text p      { font-size: .78rem; color: var(--text-3); margin: 0; }
+
+    .legend { display: flex; gap: 20px; margin-bottom: 18px; }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: .8rem; color: var(--text-3); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* ── WARNING BOX ── */
+    .warning-box {
+      background: rgba(239,68,68,.06); border: 1px solid rgba(239,68,68,.2);
+      border-radius: 14px; padding: 20px 24px; margin-bottom: 40px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .warning-box .icon { font-size: 1.4rem; flex-shrink: 0; }
+    .warning-box h4 { font-size: .95rem; font-weight: 700; color: #fca5a5; margin-bottom: 6px; }
+    .warning-box ul { color: var(--text-2); font-size: .88rem; padding-left: 18px; }
+    .warning-box li { margin-bottom: 4px; }
+
+    /* ── FINGERPRINT NOTE ── */
+    .info-box {
+      background: rgba(0,212,255,.05); border: 1px solid rgba(0,212,255,.15);
+      border-radius: 14px; padding: 18px 22px; margin-bottom: 40px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .info-box .icon { font-size: 1.2rem; flex-shrink: 0; }
+    .info-box p { font-size: .88rem; color: #a5f3ff; margin: 0; line-height: 1.6; }
+
+    /* ── CONTACT ── */
+    .contact-strip {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px 28px;
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between;
+    }
+    .contact-strip .text h4 { font-size: .95rem; font-weight: 700; color: var(--text-1); }
+    .contact-strip .text p  { font-size: .85rem; color: var(--text-2); margin: 4px 0 0; }
+    .contact-strip a {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff; text-decoration: none; font-weight: 600; font-size: .88rem;
+      padding: 10px 22px; border-radius: 10px; transition: opacity .2s; white-space: nowrap;
+    }
+    .contact-strip a:hover { opacity: .85; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 24px; text-align: center; font-size: .82rem; color: var(--text-3); }
+    footer a { color: var(--text-3); text-decoration: underline; margin: 0 8px; }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="app-badge">🗑️ Account Deletion</div>
+  <h1>Delete Your Account</h1>
+  <p>Permanently remove your TryWare AI account and all associated data. This action cannot be undone.</p>
+</div>
+
+<div class="wrapper">
+
+  <!-- App identity (Play Store requirement) -->
+  <div class="app-info">
+    <div class="app-icon">👗</div>
+    <div class="info">
+      <h3>TryWare AI</h3>
+      <p>Developed by CrazzyAppz &nbsp;·&nbsp; Virtual AI Try-On App</p>
+    </div>
+  </div>
+
+  <!-- How to delete -->
+  <p class="steps-label">How to Delete Your Account</p>
+  <div class="methods">
+
+    <!-- Method 1 — in-app -->
+    <div class="method-card primary">
+      <h3>📱 In-App <span class="method-tag">Instant</span></h3>
+      <ol class="steps">
+        <li>Open the <strong>TryWare AI</strong> app on your device.</li>
+        <li>Tap the <strong>Settings</strong> tab in the bottom navigation bar.</li>
+        <li>Scroll down to the <strong>ACCOUNT</strong> section.</li>
+        <li>Tap <strong>Delete Account</strong> (shown in red).</li>
+        <li>Read the warning and tap <strong>Delete Permanently</strong> to confirm.</li>
+      </ol>
+    </div>
+
+    <!-- Method 2 — email -->
+    <div class="method-card">
+      <h3>✉️ Email Request <span class="method-tag slow">≤ 7 days</span></h3>
+      <ol class="steps">
+        <li>Send an email to our support address below.</li>
+        <li>Use subject line: <strong>"Account Deletion Request"</strong></li>
+        <li>Include the <strong>email address</strong> linked to your TryWare AI account.</li>
+        <li>We will confirm deletion within <strong>7 business days</strong>.</li>
+      </ol>
+      <a href="mailto:crazzyapp28@gmail.com?subject=Account%20Deletion%20Request" class="mailto-link">✉️ crazzyapp28@gmail.com</a>
+    </div>
+
+  </div>
+
+  <!-- Warning -->
+  <div class="warning-box">
+    <div class="icon">⚠️</div>
+    <div>
+      <h4>Before you delete — please note:</h4>
+      <ul>
+        <li>All remaining <strong>purchased credits will be permanently forfeited</strong> (non-refundable).</li>
+        <li>Your complete try-on history and generated images on our servers will be erased.</li>
+        <li>This action <strong>cannot be undone</strong>. There is no grace period or recovery option.</li>
+        <li>Re-registering with the same email will <strong>not restore</strong> credits or history.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- What gets deleted -->
+  <p class="section-title">What Data Is Deleted vs. Retained</p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div> Permanently Deleted</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div> Retained (No PII)</div>
+  </div>
+  <div class="data-grid">
+    <div class="data-item">
+      <div class="dot deleted"></div>
+      <div class="text"><h4>Account Profile</h4><p>Name, email, profile photo URL</p></div>
+    </div>
+    <div class="data-item">
+      <div class="dot deleted"></div>
+      <div class="text"><h4>Credit Balance</h4><p>All purchased credits (non-refundable)</p></div>
+    </div>
+    <div class="data-item">
+      <div class="dot deleted"></div>
+      <div class="text"><h4>Try-On History</h4><p>All past generation records on our servers</p></div>
+    </div>
+    <div class="data-item">
+      <div class="dot deleted"></div>
+      <div class="text"><h4>Transaction Records</h4><p>Credit purchase and usage ledger</p></div>
+    </div>
+    <div class="data-item">
+      <div class="dot deleted"></div>
+      <div class="text"><h4>Firebase Auth Account</h4><p>Google Sign-In credentials revoked</p></div>
+    </div>
+    <div class="data-item">
+      <div class="dot deleted"></div>
+      <div class="text"><h4>Local Device Cache</h4><p>All locally stored images and history</p></div>
+    </div>
+    <div class="data-item" style="border-color: rgba(245,158,11,.2); background: rgba(245,158,11,.03);">
+      <div class="dot kept"></div>
+      <div class="text"><h4>Email Fingerprint</h4><p>HMAC-SHA256 hash only — no PII retained</p></div>
+    </div>
+  </div>
+
+  <!-- Fingerprint explanation -->
+  <div class="info-box">
+    <div class="icon">🔒</div>
+    <p>
+      <strong>About the Email Fingerprint:</strong> We retain a one-way cryptographic hash (HMAC-SHA256) of your email address after deletion. This hash <strong>cannot be reversed</strong> to reveal your email and contains zero personal information. It exists solely to prevent free-trial abuse — re-registering will not grant new free credits. This practice is GDPR-compliant and fully aligned with Google Play and Apple App Store policies.
+    </p>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact-strip">
+    <div class="text">
+      <h4>Need help or have questions?</h4>
+      <p>Our support team responds within 1–2 business days.</p>
+    </div>
+    <a href="mailto:crazzyapp28@gmail.com">✉️ Contact Support</a>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 CrazzyAppz · TryWare AI &nbsp;|&nbsp;
+  <a href="privacy-policy.html">Privacy Policy</a>
+</footer>
+
+</body>
+</html>
